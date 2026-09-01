@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --green: #89BC30;
+    --green-deep: #6A9621;
+    --green-dark: #456612;
+    --green-soft: #A5DC3C;
+    --green-light: #EEF7DA;
+    --paper: #FAFBF7;
+    --paper-deep: #EEF4E4;
+    --paper-muted: #E4EDE0;
+    --dark: #111612;
+    --dark-soft: #1A231C;
+    --dark-deep: #0B0E0C;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color: var(--dark);
+    background-color: var(--paper);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection {
+    background-color: #89BC30;
+    color: #ffffff;
+  }
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid #89BC30;
+  outline-offset: 2px;
+}
+
+/* Glow Orbs */
+.glow-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.22;
+  pointer-events: none;
+  animation: floatOrb 12s ease-in-out infinite alternate;
+}
+
+.glow-orb.slow {
+  animation-duration: 18s;
+}
+
+.glow-orb.reverse {
+  animation-direction: alternate-reverse;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(25px, -20px) scale(1.08);
+  }
+  100% {
+    transform: translate(-15px, 25px) scale(0.95);
+  }
+}
+
+/* Fill bar for metrics */
+.fill-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(17, 22, 18, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dark .fill-bar {
+  background: rgba(250, 251, 247, 0.12);
+}
+
+.fill-bar__inner {
+  height: 100%;
+  background: linear-gradient(90deg, #89BC30, #A5DC3C);
+  border-radius: 9999px;
+  transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tilt Card */
+.tilt-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+}
+
+.tilt-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(17, 22, 18, 0.08);
+}
