@@ -2,20 +2,20 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand palette, exact from brand guide */
+  /* Brand palette, exact from Vereen digital logo.pdf */
   --white: #ffffff;
-  --dark: #202020;
-  --green: #708238;
+  --dark: #182018;
+  --green: #89BC30; /* Lime Green HEX #89BC30, RGB(137, 188, 48) */
 
-  /* Working tints derived from the three brand colors for layout depth */
+  /* Working tints derived from the brand colors for layout depth */
   --paper: #ffffff;
-  --paper-deep: #f2f3ee;
-  --dark-soft: #2b2b2b;
-  --dark-deep: #151515;
-  --green-deep: #566629;
-  --green-soft: #9cb06a;
-  --green-tint: #eef1e6;
-  --line: rgba(32, 32, 32, 0.14);
+  --paper-deep: #f3f7ec;
+  --dark-soft: #222c23;
+  --dark-deep: #0e140f;
+  --green-deep: #6f9925;
+  --green-soft: #a8db42;
+  --green-tint: #f0f7e4;
+  --line: rgba(24, 32, 24, 0.12);
   --line-on-dark: rgba(255, 255, 255, 0.16);
 }
 
@@ -71,7 +71,7 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Signature: slowly drifting ambient glow orbs (from the Dusk system, retinted) */
+/* Signature: slowly drifting ambient glow orbs */
 .glow-orb {
   position: absolute;
   border-radius: 50%;

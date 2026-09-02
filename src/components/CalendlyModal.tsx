@@ -8,9 +8,9 @@ export default function CalendlyModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [iframeLoading, setIframeLoading] = useState(true);
 
-  // Clean base URL and append dark/olive theme parameters + email
+  // Clean base URL and append dark/lime green theme parameters + email
   const baseUrl = siteConfig.calendlyUrl.split("?")[0];
-  const calendlySrc = `${baseUrl}?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=202020&text_color=ffffff&primary_color=708238${
+  const calendlySrc = `${baseUrl}?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=182018&text_color=ffffff&primary_color=89BC30${
     siteConfig.email ? `&email=${encodeURIComponent(siteConfig.email)}` : ""
   }`;
 
