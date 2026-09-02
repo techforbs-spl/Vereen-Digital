@@ -5,12 +5,14 @@ export type LogoVariant =
   | "dark"
   | "light"
   | "white"
+  | "full"
+  | "full-light"
   | "dark-with-name"
   | "light-with-name"
   | "white-with-name";
 
 export function LogoMark({
-  size = 28,
+  size = 32,
   variant,
   shellColor,
   className = "",
@@ -31,30 +33,25 @@ export function LogoMark({
     }
   }
 
-  let src = "/logo/dark-grey-green-icon.png";
-  let alt = `${siteConfig.name} Icon`;
+  let src = "/logo/vereen-icon.png";
+  let alt = `${siteConfig.name} Logo`;
 
   switch (selectedVariant) {
     case "light":
-      src = "/logo/white-green-icon.png";
-      break;
     case "white":
-      src = "/logo/all-white-icon.png";
+      src = "/logo/vereen-icon.png";
       break;
+    case "full":
     case "dark-with-name":
-      src = "/logo/dark-grey-with-name.png";
-      alt = `${siteConfig.name} Logo`;
+      src = "/logo/vereen-full-logo.png";
       break;
+    case "full-light":
     case "light-with-name":
-      src = "/logo/white-green-with-name.png";
-      alt = `${siteConfig.name} Logo`;
-      break;
     case "white-with-name":
-      src = "/logo/all-white-with-name.png";
-      alt = `${siteConfig.name} Logo`;
+      src = "/logo/vereen-full-logo-light.png";
       break;
     default:
-      src = "/logo/dark-grey-green-icon.png";
+      src = "/logo/vereen-icon.png";
       break;
   }
 
@@ -65,8 +62,10 @@ export function LogoMark({
       width={size}
       height={size}
       className={`inline-block object-contain ${className}`}
-      style={{ width: size, height: size }}
+      style={{ width: "auto", height: size }}
       priority
     />
   );
 }
+
+export default LogoMark;
