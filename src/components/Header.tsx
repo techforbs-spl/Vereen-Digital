@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { BrandLogo } from "./LogoMark";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { PrimaryCTA } from "./CTA";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -63,13 +64,9 @@ export function Header() {
 
         {/* CTA Button */}
         <div className="hidden lg:block">
-          <a
-            href="#book"
-            className="focus-ring inline-flex items-center gap-2 rounded-full bg-green px-5 py-2.5 font-body text-[0.88rem] font-semibold text-white transition-all duration-200 hover:bg-green-deep hover:shadow-md active:scale-95"
-          >
+          <PrimaryCTA href="#book" className="!px-5 !py-2.5 !text-[0.88rem]">
             Get in Touch
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
+          </PrimaryCTA>
         </div>
 
         {/* Mobile menu trigger */}
@@ -98,14 +95,12 @@ export function Header() {
               </a>
             ))}
             <div className="pt-4 border-t border-dark/10">
-              <a
+              <PrimaryCTA
                 href="#book"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-green px-6 py-3.5 font-body text-[0.95rem] font-semibold text-white shadow-md hover:bg-green-deep"
+                className="w-full justify-center"
               >
                 Get in Touch
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
+              </PrimaryCTA>
             </div>
           </nav>
         </div>
@@ -113,3 +108,5 @@ export function Header() {
     </header>
   );
 }
+
+export default Header;

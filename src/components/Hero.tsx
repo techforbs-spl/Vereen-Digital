@@ -1,6 +1,7 @@
 import React from "react";
 import { Reveal, RevealWords } from "./Reveal";
-import { ArrowUpRight, Briefcase, Brain, TrendingUp, CalendarCheck } from "lucide-react";
+import { Briefcase, Brain, TrendingUp, CalendarCheck } from "lucide-react";
+import { PrimaryCTA, SecondaryCTA } from "./CTA";
 
 export function Hero() {
   return (
@@ -65,22 +66,8 @@ export function Hero() {
         {/* Action Buttons */}
         <Reveal delay={0.55}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            <a
-              href="#book"
-              className="focus-ring inline-flex items-center gap-2.5 rounded-full bg-green px-7 py-4 font-body text-[0.95rem] font-semibold text-white shadow-md transition-all duration-200 hover:bg-green-deep hover:shadow-lg active:scale-95"
-            >
-              Get in Touch
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <a
-              href="#work"
-              className="focus-ring group inline-flex items-center gap-2 font-body text-[0.95rem] font-semibold text-dark transition-colors hover:text-green-deep"
-            >
-              <span className="border-b-2 border-dark/20 pb-0.5 transition-colors group-hover:border-green-deep">
-                See the Proof
-              </span>
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </a>
+            <PrimaryCTA href="#book">Get in Touch</PrimaryCTA>
+            <SecondaryCTA href="#work">See the Proof</SecondaryCTA>
           </div>
         </Reveal>
 
@@ -130,3 +117,5 @@ function Stat({
     </div>
   );
 }
+
+export default Hero;
