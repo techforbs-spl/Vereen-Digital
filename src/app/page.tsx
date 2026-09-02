@@ -11,6 +11,7 @@ import { Testimonials } from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
+import { CalendlyModal } from "@/components/CalendlyModal";
 
 export default function Home() {
   return (
@@ -29,6 +30,7 @@ export default function Home() {
         <FinalCTA />
       </main>
       <Footer />
+      <CalendlyModal />
     </div>
   );
 }

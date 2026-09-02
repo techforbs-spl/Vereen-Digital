@@ -1,33 +1,39 @@
 import React from "react";
 import { Reveal } from "./Reveal";
+import { Handshake, UserCheck, LineChart, Eye } from "lucide-react";
 
 interface ModelPillar {
   tag: string;
   title: string;
   description: string;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 const pillars: ModelPillar[] = [
   {
     tag: "Governance",
+    icon: Handshake,
     title: "One definition of a good lead. Before anyone starts spending.",
     description:
       "Marketing and sales agree on what a qualified lead looks like before the work starts. No debating the scorecard after the fact.",
   },
   {
     tag: "Access",
+    icon: UserCheck,
     title: "The person who shaped the strategy stays in the room.",
     description:
       "No polished sales call followed by a mystery hand-off. Senior people stay close enough to explain the work, defend the trade-offs and make the next decision with you.",
   },
   {
     tag: "Cadence",
+    icon: LineChart,
     title: "Every test leaves a paper trail.",
     description:
       "We log the hypothesis, the result and the next action. Wins are useful. Failed tests are useful too, especially when they stop you repeating the same bad assumption next quarter.",
   },
   {
     tag: "Transparency",
+    icon: Eye,
     title: "The source data stays yours.",
     description:
       "Your accounts, your analytics, your CRM. The reporting should make the truth easier to see, not lock it inside somebody else's slide deck.",
@@ -71,21 +77,27 @@ export function OperatingModel() {
               </p>
             </Reveal>
 
-            {pillars.map((pillar, idx) => (
-              <Reveal key={pillar.tag} delay={0.1 + idx * 0.08}>
-                <div className="grid grid-cols-1 gap-4 border-t border-paper/12 py-8 sm:grid-cols-[130px_1fr]">
-                  <span className="eyebrow text-green-soft pt-1">{pillar.tag}</span>
-                  <div>
-                    <p className="font-display text-[1.15rem] font-semibold leading-snug text-paper">
-                      {pillar.title}
-                    </p>
-                    <p className="mt-3 max-w-[500px] font-body text-[0.92rem] leading-relaxed text-paper/65">
-                      {pillar.description}
-                    </p>
+            {pillars.map((pillar, idx) => {
+              const Icon = pillar.icon;
+              return (
+                <Reveal key={pillar.tag} delay={0.1 + idx * 0.08}>
+                  <div className="grid grid-cols-1 gap-4 border-t border-paper/12 py-8 sm:grid-cols-[130px_1fr]">
+                    <span className="eyebrow text-green-soft pt-1 flex items-center gap-1.5">
+                      <Icon className="h-3.5 w-3.5" />
+                      {pillar.tag}
+                    </span>
+                    <div>
+                      <p className="font-display text-[1.15rem] font-semibold leading-snug text-paper">
+                        {pillar.title}
+                      </p>
+                      <p className="mt-3 max-w-[500px] font-body text-[0.92rem] leading-relaxed text-paper/65">
+                        {pillar.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              );
+            })}
             <div className="border-t border-paper/12"></div>
           </div>
         </div>
@@ -93,3 +105,5 @@ export function OperatingModel() {
     </section>
   );
 }
+
+export default OperatingModel;

@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { Reveal } from "./Reveal";
-import { ArrowUpRight, CheckCircle, Mail, Send } from "lucide-react";
+import { ArrowUpRight, CheckCircle, Mail } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
 export function FinalCTA() {
   const [formState, setFormState] = useState({
@@ -170,10 +171,18 @@ export function FinalCTA() {
           <div className="mt-8 flex flex-col items-center justify-center gap-2 text-center">
             <p className="font-body text-[0.85rem] text-paper/60 flex items-center gap-2">
               <Mail className="h-4 w-4 text-green-soft" />
-              <span>Direct inquiries: <a href="mailto:hello@vereendigital.com" className="text-green-soft underline hover:text-green">hello@vereendigital.com</a></span>
+              <span>
+                Direct inquiries:{" "}
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="text-green-soft underline hover:text-green"
+                >
+                  {siteConfig.email}
+                </a>
+              </span>
             </p>
-            <p className="font-body text-[0.78rem] text-paper/40">
-              We respect your privacy and reply within one business day.
+            <p className="font-body text-[0.78rem] text-paper/45">
+              {siteConfig.email} · We reply within one business day.
             </p>
           </div>
         </Reveal>
@@ -181,3 +190,5 @@ export function FinalCTA() {
     </section>
   );
 }
+
+export default FinalCTA;

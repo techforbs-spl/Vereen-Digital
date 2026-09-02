@@ -1,5 +1,6 @@
 import React from "react";
 import { BrandLogo } from "./LogoMark";
+import { siteConfig } from "@/config/site";
 
 export function Footer() {
   return (
@@ -15,10 +16,10 @@ export function Footer() {
               Performance marketing and AI SEO for high-growth companies who report on pipeline, not impressions. We reply within one business day.
             </p>
             <a
-              href="mailto:hello@vereendigital.com"
+              href={`mailto:${siteConfig.email}`}
               className="mt-6 inline-block font-body text-[0.88rem] text-green-soft underline hover:text-green"
             >
-              hello@vereendigital.com
+              {siteConfig.email}
             </a>
           </div>
 
@@ -88,7 +89,7 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:hello@vereendigital.com" className="font-body text-[0.88rem] text-paper/70 hover:text-green-soft transition-colors">
+                  <a href={`mailto:${siteConfig.email}`} className="font-body text-[0.88rem] text-paper/70 hover:text-green-soft transition-colors">
                     Partner Inquiry
                   </a>
                 </li>
@@ -99,7 +100,7 @@ export function Footer() {
 
         {/* Bottom copyright & legal */}
         <div className="flex flex-col gap-4 py-8 font-body text-[0.8rem] text-paper/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Vereen Digital. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-paper/75 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-paper/75 transition-colors">Terms of Service</a>
@@ -110,3 +111,5 @@ export function Footer() {
     </footer>
   );
 }
+
+export default Footer;

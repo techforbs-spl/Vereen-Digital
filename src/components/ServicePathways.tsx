@@ -54,19 +54,25 @@ export function ServicePathways() {
   return (
     <section id="services" className="bg-paper py-24 lg:py-32">
       <div className="mx-auto max-w-[1160px] px-6 lg:px-10">
-        <div className="max-w-[800px]">
+        <div className="max-w-[800px] mx-auto text-center">
           <Reveal>
             <p className="eyebrow text-green-deep">Pick the problem. The channel comes second.</p>
             <h2 className="mt-5 font-display text-[2.1rem] font-bold leading-[1.15] text-dark lg:text-[2.7rem]">
               One visibility engine. More ways to turn it into customers.
             </h2>
           </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-6 max-w-[620px] font-body text-[1rem] leading-relaxed text-dark/75">
-              Buyers begin with questions. The question might land in Google, an AI Overview, ChatGPT, Perplexity, Gemini or Copilot. Your visibility needs to meet them there.
-              <br /><br />
-              We will tell you if a channel is not the answer. It is cheaper than pretending otherwise.
-            </p>
+          <Reveal delay={0.06}>
+            <div className="mt-6 max-w-[660px] mx-auto text-center font-body text-[1rem] leading-relaxed text-dark/75 space-y-3">
+              <p>
+                Buyers begin with questions.<br />
+                The question might land in Google, an AI Overview,<br />
+                ChatGPT, Perplexity, Gemini or Copilot.<br />
+                Your visibility needs to meet them there.
+              </p>
+              <p className="font-semibold text-dark/90">
+                We will tell you if a channel is not the answer. It is cheaper than pretending otherwise.
+              </p>
+            </div>
           </Reveal>
         </div>
 
@@ -81,11 +87,13 @@ export function ServicePathways() {
                   <div className="p-2.5 rounded-2xl bg-green-light/60">
                     {svc.icon}
                   </div>
-                  <span className={`eyebrow px-2.5 py-1 rounded-full ${
-                    svc.badge === "Primary" 
-                      ? "bg-green/15 text-green-deep font-bold" 
-                      : "bg-dark/5 text-dark/50"
-                  }`}>
+                  <span
+                    className={`eyebrow px-2.5 py-1 rounded-full ${
+                      svc.badge === "Primary"
+                        ? "bg-green/15 text-green-deep font-bold"
+                        : "bg-dark/5 text-dark/50"
+                    }`}
+                  >
                     {svc.badge}
                   </span>
                 </div>
@@ -114,3 +122,5 @@ export function ServicePathways() {
     </section>
   );
 }
+
+export default ServicePathways;
