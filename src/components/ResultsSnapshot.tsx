@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
 import { BarChart3, Bot, Timer } from "lucide-react";
 import { motion } from "framer-motion";
-import { Reveal } from "./Reveal";
+import Reveal from "./Reveal";
 
 function IconChatArrow({ className = "h-6 w-6" }: { className?: string }) {
   return (
@@ -24,48 +23,20 @@ function IconChatArrow({ className = "h-6 w-6" }: { className?: string }) {
 }
 
 const METRICS = [
-  {
-    icon: IconChatArrow,
-    value: "~25%",
-    label: "More inbound enquiries",
-    scope:
-      "AI SEO clients, after citation visibility established in ChatGPT, Gemini and Google AI Overviews",
-    fill: "85%",
-  },
-  {
-    icon: BarChart3,
-    value: "18%",
-    label: "Year-on-year revenue growth",
-    scope:
-      "Home and housing e-commerce brand, 12-month organic SEO engagement, US market",
-    fill: "75%",
-  },
-  {
-    icon: Bot,
-    value: "7+",
-    label: "Businesses now cited in AI search",
-    scope:
-      "Appearing in ChatGPT, Gemini, Perplexity and Google AI Overviews for high-intent queries in their category",
-    fill: "90%",
-  },
-  {
-    icon: Timer,
-    value: "Under 5 mos",
-    label: "To First AI Citation",
-    scope:
-      "From technical overhaul to first AI citation. Outsourced professional services brand, Australia and Canada",
-    fill: "80%",
-  },
+  { icon: IconChatArrow, value: "~25%", label: "More inbound enquiries", scope: "AI SEO clients, after citation visibility established in ChatGPT, Gemini and Google AI Overviews", fill: "80%" },
+  { icon: BarChart3, value: "18%", label: "Year-on-year revenue growth", scope: "Home and housing e-commerce brand, 12-month organic SEO engagement, US market", fill: "75%" },
+  { icon: Bot, value: "7+", label: "Businesses now cited in AI search", scope: "Appearing in ChatGPT, Gemini, Perplexity and Google AI Overviews for high-intent queries in their category", fill: "90%" },
+  { icon: Timer, value: "Under 5 months", label: "To First AI Citation", scope: "From technical overhaul to first AI citation. Outsourced professional services brand, Australia and Canada", fill: "85%" },
 ];
 
-export function ResultsSnapshot() {
+export default function ResultsSnapshot() {
   return (
     <section className="bg-paper py-24 lg:py-32">
       <div className="mx-auto max-w-[1160px] px-6 lg:px-10">
         <Reveal>
           <div className="text-center max-w-[700px] mx-auto">
-            <p className="eyebrow text-green-deep">The numbers that actually matter</p>
-            <h2 className="mt-5 font-display text-[2rem] font-bold leading-[1.15] text-dark lg:text-[2.5rem]">
+            <p className="eyebrow text-green-deep text-center">The numbers that actually matter</p>
+            <h2 className="mt-5 font-display text-[2rem] font-bold leading-[1.15] text-dark lg:text-[2.5rem] lg:font-extrabold text-center">
               You cannot pay salaries with impressions.
             </h2>
           </div>
@@ -110,13 +81,11 @@ function FillCard({
         <div className="mb-4 text-green-deep">
           <Icon className="h-7 w-7" strokeWidth={1.5} />
         </div>
-        <p
-          className={`tabular font-display font-extrabold leading-none text-dark ${
-            value.length > 8
-              ? "text-[1.3rem] sm:text-[1.5rem] lg:text-[1.8rem] whitespace-nowrap"
-              : "text-[2.6rem] lg:text-[3rem]"
-          }`}
-        >
+        <p className={`tabular font-display font-extrabold leading-none text-dark ${
+          value.length > 8 
+            ? "text-[1.3rem] sm:text-[1.5rem] lg:text-[1.8rem] whitespace-nowrap" 
+            : "text-[2.6rem] lg:text-[3rem]"
+        }`}>
           {value}
         </p>
         <div className="fill-bar mt-5">
@@ -138,5 +107,3 @@ function FillCard({
     </div>
   );
 }
-
-export default ResultsSnapshot;

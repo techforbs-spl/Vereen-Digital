@@ -3,15 +3,14 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config/site";
-import { X } from "lucide-react";
 
-export function CalendlyModal() {
+export default function CalendlyModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [iframeLoading, setIframeLoading] = useState(true);
 
-  // Clean base URL and append dark theme parameters + email
+  // Clean base URL and append dark/olive theme parameters + email
   const baseUrl = siteConfig.calendlyUrl.split("?")[0];
-  const calendlySrc = `${baseUrl}?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=111612&text_color=ffffff&primary_color=89BC30${
+  const calendlySrc = `${baseUrl}?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=202020&text_color=ffffff&primary_color=708238${
     siteConfig.email ? `&email=${encodeURIComponent(siteConfig.email)}` : ""
   }`;
 
@@ -20,80 +19,62 @@ export function CalendlyModal() {
       setIsOpen(true);
       setIframeLoading(true);
     };
-
     window.addEventListener("open-calendly", handleOpen);
-
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement).closest('a[href="#book"]');
-      if (target) {
-        // Optional: uncomment if direct modal is preferred over scrolling
-      }
-    };
-
-    document.addEventListener("click", handleAnchorClick);
-
-    return () => {
-      window.removeEventListener("open-calendly", handleOpen);
-      document.removeEventListener("click", handleAnchorClick);
-    };
+    return () => window.removeEventListener("open-calendly", handleOpen);
   }, []);
 
+  // Prevent background scroll when modal is open
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsOpen(false);
-    };
     if (isOpen) {
       document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = "unset";
-      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            className="absolute inset-0 bg-dark/85 backdrop-blur-md"
           />
 
+          {/* Modal Content */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", duration: 0.5, bounce: 0.1 }}
-            className="relative flex flex-col h-full max-h-[750px] w-full max-w-4xl overflow-hidden rounded-3xl border border-paper/10 bg-dark shadow-2xl"
+            transition={{ type: "spring", duration: 0.5, bounce: 0.2 }}
+            className="relative z-10 flex h-[680px] max-h-[90vh] w-full max-w-[840px] flex-col overflow-hidden rounded-2xl border border-paper/10 bg-dark-soft shadow-2xl"
           >
-            <div className="flex items-center justify-between border-b border-paper/10 px-6 py-4">
-              <div>
-                <h3 className="font-display text-lg font-bold text-paper">
-                  Schedule a Consultation
-                </h3>
-                <p className="font-body text-xs text-paper/60">
-                  Select a convenient time for a 30-minute growth discussion.
-                </p>
-              </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="focus-ring rounded-full p-2 text-paper/70 transition-colors hover:bg-paper/10 hover:text-paper"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+            {/* Floating Close Button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute right-4 top-4 z-50 focus-ring rounded-full bg-dark-deep/80 p-2 text-paper/70 transition-all duration-200 hover:bg-dark-deep hover:text-paper cursor-pointer border border-paper/10 hover:scale-105 active:scale-95"
+              aria-label="Close modal"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
 
-            <div className="relative flex-1 w-full bg-dark">
+            {/* Iframe Area */}
+            <div className="relative flex-1 bg-dark-soft">
               {iframeLoading && (
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-dark-soft text-paper/60">
                   <div className="h-8 w-8 animate-spin rounded-full border-2 border-green border-t-transparent" />
+                  <p className="mt-4 text-[0.8rem] font-body tracking-wider uppercase text-green-soft">
+                    Loading Scheduler...
+                  </p>
                 </div>
               )}
               <iframe
@@ -101,7 +82,8 @@ export function CalendlyModal() {
                 width="100%"
                 height="100%"
                 onLoad={() => setIframeLoading(false)}
-                className="h-full w-full border-0"
+                className="border-0"
+                title="Calendly Scheduler"
               />
             </div>
           </motion.div>
@@ -110,5 +92,3 @@ export function CalendlyModal() {
     </AnimatePresence>
   );
 }
-
-export default CalendlyModal;

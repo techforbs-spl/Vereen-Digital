@@ -1,107 +1,59 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 
-interface RevealProps {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-  threshold?: number;
-}
-
-export function Reveal({
+export default function Reveal({
   children,
   delay = 0,
-  className = "",
-  threshold = 0.1,
-}: RevealProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold, rootMargin: "0px 0px -40px 0px" }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [threshold]);
-
+  className,
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}) {
   return (
-    <div
-      ref={ref}
+    <motion.div
       className={className}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        filter: isVisible ? "blur(0px)" : "blur(6px)",
-        transform: isVisible ? "translateY(0px)" : "translateY(16px)",
-        transition: `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, filter 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s`,
-      }}
+      initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "-70px" }}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 
 export function RevealWords({
   text,
+  className,
   delay = 0,
-  className = "",
 }: {
   text: string;
-  delay?: number;
   className?: string;
+  delay?: number;
 }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   const words = text.split(" ");
-
   return (
-    <span ref={ref} className={className}>
-      {words.map((word, idx) => (
-        <span
-          key={idx}
+    <span className={className}>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
           className="inline-block"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            filter: isVisible ? "blur(0px)" : "blur(5px)",
-            transform: isVisible ? "translateY(0px)" : "translateY(16px)",
-            transition: `opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay + idx * 0.04}s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay + idx * 0.04}s, filter 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${delay + idx * 0.04}s`,
+          initial={{ opacity: 0, y: 16, filter: "blur(5px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{
+            duration: 0.55,
+            delay: delay + i * 0.045,
+            ease: [0.22, 1, 0.36, 1],
           }}
         >
-          {word}&nbsp;
-        </span>
+          {word}
+          {i < words.length - 1 ? "\u00A0" : ""}
+        </motion.span>
       ))}
     </span>
   );
 }
-
-export default Reveal;
