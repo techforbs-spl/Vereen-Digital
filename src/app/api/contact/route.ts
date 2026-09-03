@@ -17,6 +17,7 @@ export async function POST(req: Request) {
     }
 
     const recipientEmail =
+      process.env.CONTACT_EMAIL ||
       process.env.CONTACT_RECEIVER_EMAIL ||
       process.env.NEXT_PUBLIC_CONTACT_EMAIL ||
       siteConfig.email ||
@@ -85,7 +86,7 @@ export async function POST(req: Request) {
       </html>
     `;
 
-    // 1. Try Resend if API Key is configured (Recommended for Vercel)
+    // 1. Try Resend if API Key is configured
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       const fromEmail =
@@ -103,7 +104,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, method: "resend" });
     }
 
-    // 2. Try SMTP / Nodemailer (Hostinger, Gmail, Custom Domain) if configured
+    // 2. Try SMTP / Nodemailer (Hostinger, Gmail, Custom Domain)
     const hasSmtp =
       Boolean(process.env.SMTP_USER) &&
       Boolean(process.env.SMTP_PASS) &&
@@ -155,7 +156,7 @@ export async function POST(req: Request) {
     console.log(`Website: ${website}`);
     console.log(`Message: ${whatToGrow}`);
     console.log(
-      "Note: Set RESEND_API_KEY or SMTP settings in Vercel/env to deliver live emails."
+      "Note: Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_EMAIL in Vercel to receive emails."
     );
     console.log("------------------------------------------");
 
@@ -163,7 +164,7 @@ export async function POST(req: Request) {
       success: true,
       method: "dev-log",
       message:
-        "Inquiry captured. Configure RESEND_API_KEY or SMTP credentials in Vercel to receive emails directly in your inbox.",
+        "Inquiry captured. Configure SMTP in Vercel to receive emails directly.",
     });
   } catch (error: any) {
     console.error("Error processing contact form:", error);
